@@ -52,7 +52,7 @@ const LoginPage = ({setIsAuthenticated, setCurrentPage}) => {
             // ...
             // alert("Login Success!");
             // SET VALUES TO LOCAL STORAGE
-
+            localStorage.setItem("email", result.user.email);
             setIsAuthenticated(true);
         }).catch((error) => {
             // Handle Errors here.
@@ -80,6 +80,7 @@ const LoginPage = ({setIsAuthenticated, setCurrentPage}) => {
             event.preventDefault();
             try {
                 await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
+                localStorage.setItem("email", formValue.email);
                 alert("Login success");
             } catch (error) {
                 alert("Login failed");
@@ -90,7 +91,7 @@ const LoginPage = ({setIsAuthenticated, setCurrentPage}) => {
 
     return (
     <div className='flex justify-center w-full h-screen items-center bg-black bg-[url("assets/images/bg.jpg")] bg-cover bg-blend-multiply bg-opacity-40'>
-        <div className='w-[30%] h-fit bg-white p-5 py-10'>
+        <div className='w-[30%] min-w-[300px] md:min-w-[400px] h-fit bg-white p-5 py-10'>
             <form onSubmit={LoginAuth} action="" className='flex flex-col text-center justify-center placeholder:text-center'>
                 <input type="text" name='email'    onChange={HandleInputs} value={formValue.email} placeholder='Username' className='placeholder:text-center text-center shadow-lg p-2' required /><br />
                 <input type="text" name='password' onChange={HandleInputs} value={formValue.password} placeholder='Password' className='placeholder:text-center text-center shadow-lg p-2' required /><br />
